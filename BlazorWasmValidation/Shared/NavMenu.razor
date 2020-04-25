@@ -1,0 +1,40 @@
+﻿@using System.Linq;
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column">
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All"><h4>Pub List</h4></NavLink>
+        </li>
+        @foreach (var pub in Pubs)
+        {
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="@GetRoute(pub.Key)">@pub.Value</NavLink>
+            </li>
+        }
+    </ul>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    public Dictionary<int, string> Pubs { get; set; }
+
+    [Inject]
+    public IPubsService PubsService { get; set; }
+
+
+    private string GetRoute(int id) => 
+        $"pubs/{id}";
+
+    protected async override Task OnInitializedAsync()
+    {
+        Pubs = (await PubsService.GetPubs()).ToDictionary(p => p.Id, p => p.Name);
+    }
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

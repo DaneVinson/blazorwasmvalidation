@@ -1,0 +1,31 @@
+﻿@page "/pubs/4"
+@inherits BlazorWasmValidation.ViewModels.PubViewModel4
+
+<h3 style="display:inline">Edit Pub @(Pub?.Name)</h3>
+@if (Context != null)
+{
+    <hr />
+    <div class="form-group">
+        <button @onclick="Save" class="btn btn-primary" disabled="@(IsBusy || !IsValid)">Save</button>
+    </div>
+    <EditForm EditContext="@Context">
+        <ObjectGraphDataAnnotationsValidator />
+        <div class="row">
+            <div class="form-group col-2">
+                <label class="control-label">Id</label>
+                <input @bind="@Pub.Id" class="form-control" readonly />
+            </div>
+            <div class="form-group col-5">
+                <label class="control-label">Name</label>
+                <InputText @bind-Value="@Pub.Name" class="form-control" autocomplet="off" />
+                <ValidationMessage For="@(() => Pub.Name)" />
+            </div>
+            <div class="form-group col-5">
+                <label class="control-label">Rank (1-5)</label>
+                <InputNumber @bind-Value="@Pub.Rank" class="form-control" />
+                <ValidationMessage For="@(() => Pub.Rank)" />
+            </div>
+        </div>
+        <TapsEditor Pub="@Pub" Add="@AddTap" />
+    </EditForm>
+}

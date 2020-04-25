@@ -1,0 +1,28 @@
+﻿@page "/"
+@inject IPubsService Service
+
+<h1>Pubs</h1>
+<ul>
+    @foreach(var pub in Pubs)
+    {
+        <li>@pub.ToString()
+            <ul>
+                @foreach (var beer in pub.OnTap)
+                {
+                    <li>@beer.ToString()</li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        Pubs = (await Service.GetPubs()).ToList();
+        StateHasChanged();
+    }
+
+    private List<Pub> Pubs { get; set; }
+}

@@ -1,0 +1,39 @@
+﻿@page "/pubs/3"
+@inject PubViewModel3 ViewModel
+
+<h3 style="display:inline">Edit Pub @(ViewModel.Pub?.Name)</h3>
+<hr />
+
+<div class="form-group">
+    <button @onclick="@ViewModel.Save" class="btn btn-primary">Save</button>
+</div>
+<div class="row">
+    <div class="form-group col-2">
+        <label class="control-label">Id</label>
+        <input @bind="@ViewModel.Pub.Id" class="form-control" readonly />
+    </div>
+    <div class="form-group col-5">
+        <label class="control-label">Name</label>
+        @*<input @bind-value="@ViewModel.Pub.Name" @bind-value:event="oninput" class="form-control" autocomplet="off" />*@
+        <input value="@ViewModel.Pub.Name" @oninput="OnInput" class="form-control" autocomplete="off"/>
+    </div>
+    @*<div class="form-group col-5">
+        <label class="control-label">Rank (1-5)</label>
+        <InputNumber @bind-Value="@ViewModel.Pub.Rank" class="form-control" />
+        <ValidationMessage For="@(() => ViewModel.Pub.Rank)" />
+    </div>*@
+</div>
+
+@code {
+    public void OnInput(ChangeEventArgs args)
+    {
+        ViewModel.Pub.Name = args.Value.ToString();
+        Console.WriteLine("change");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.Initialize(3);
+        ViewModel.StateChanged = StateHasChanged;
+    }
+}

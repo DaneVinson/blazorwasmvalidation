@@ -1,0 +1,22 @@
+﻿<div class="form-group">
+    <button @onclick="Add.Invoke" class="btn btn-primary">New Tap</button>
+</div>
+@if (Pub != null)
+{
+    <h3>On Tap</h3>
+    <label class="col-3">Name</label>
+    <label class="col-3">Style</label>
+    <label class="col-3">ABV</label>
+    @foreach (var beer in Pub.OnTap)
+    {
+        <BeerEdit Beer="@beer" />
+    }
+}
+
+@code
+{
+    [Parameter]
+    public Action Add { get; set; }
+    [Parameter]
+    public Pub Pub { get; set; }
+}

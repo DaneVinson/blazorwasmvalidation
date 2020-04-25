@@ -1,0 +1,20 @@
+﻿<div class="row">
+    <div class="form-group col-3">
+        <InputText @bind-Value="@Beer.Name" class="form-control" autocomplet="off" />
+        <ValidationMessage For="@(() => Beer.Name)" />
+    </div>
+    <div class="form-group col-3">
+        <InputText @bind-Value="@Beer.Style" class="form-control" autocomplet="off" />
+        <ValidationMessage For="@(() => Beer.Style)" />
+    </div>
+    <div class="form-group col-3">
+        <InputNumber @bind-Value="@Beer.Abv" class="form-control" />
+        <ValidationMessage For="@(() => Beer.Abv)" />
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public Beer Beer { get; set; }
+}
