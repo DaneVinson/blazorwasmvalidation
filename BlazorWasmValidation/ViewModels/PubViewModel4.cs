@@ -30,6 +30,7 @@ namespace BlazorWasmValidation.ViewModels
 
         public async Task Save()
         {
+            StateHasChanged();
             IsValid = Context?.Validate() ?? true;
             if (!IsValid) { return; }
         }
