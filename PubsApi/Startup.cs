@@ -47,18 +47,21 @@ namespace PubsApi
         {
             services
                 .AddSingleton<IPubsService, PubsService>()
-                .AddSingleton<AbstractValidator<Pub>, PubValidator>()
+                .AddSingleton<AbstractValidator<Pub>, PubAsyncValidator>()
                 .AddSingleton<AbstractValidator<Beer>, BeerValidator>()
                 .AddControllers()
-                .AddFluentValidation(config =>
-                {
-                    config.AutomaticValidationEnabled = true;
-                    config.ImplicitlyValidateChildProperties = true;
-                    config.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
-                    config.RegisterValidatorsFromAssemblyContaining<Beer>();
-                })
+                // Automatic validation doesn't work well with async validators
+                //.AddFluentValidation(config =>
+                //{
+                //    config.AutomaticValidationEnabled = true;
+                //    config.ImplicitlyValidateChildProperties = true;
+                //    config.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                //    config.RegisterValidatorsFromAssemblyContaining<Beer>();
+                //})
                 .ConfigureApiBehaviorOptions(options =>
                 {
+                    // Enable/disable automatic validation
+                    options.SuppressModelStateInvalidFilter = true;
                     options.InvalidModelStateResponseFactory = context =>
                     {
                         return new BadRequestObjectResult(

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PubsAndBeersDomain
 {
@@ -10,13 +12,13 @@ namespace PubsAndBeersDomain
         [Range(1, int.MaxValue)]
         public int Id { get; set; }
 
-        [Required]
+        [Required()]
         public string Name { get; set; }
 
         [ValidateComplexType]
         public List<Beer> OnTap { get; set; } = new List<Beer>();
 
-        [Range(1, 5)]
+        [Range(1, 5, ErrorMessage = "Attribute validation requires rank to be between 1 and 5")]
         public int Rank { get; set; }
 
 
@@ -42,6 +44,23 @@ namespace PubsAndBeersDomain
                 .WithMessage("Rank must be between 1 and 5");
             RuleForEach(pub => pub.OnTap)
                 .Must(beer => beerValidator.Validate(beer).IsValid);
+        }
+    }
+
+    public class PubAsyncValidator : PubValidator
+    {
+        public PubAsyncValidator(
+            AbstractValidator<Beer> beerValidator, 
+            IPubsService pubsService) 
+            : base(beerValidator)
+        {
+            RuleFor(pub => pub.Name)
+                .MustAsync(async (name, cancellation) =>
+                {
+                    var pubs = await pubsService.GetPubs();
+                    return !pubs.Any(p => p.Name == name);
+                })
+                .WithMessage($"Pub name already in use");
         }
     }
 }
