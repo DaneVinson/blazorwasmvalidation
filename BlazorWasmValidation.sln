@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWasmValidation", "Bla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubsAndBeersDomain", "PubsAndBeersDomain\PubsAndBeersDomain.csproj", "{1B95DA88-A0C4-4D37-BBC5-F08ECD4F6D4E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PubsApi", "PubsApi\PubsApi.csproj", "{A989B17D-8C69-4EA5-BBBC-921F322B1CE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1B95DA88-A0C4-4D37-BBC5-F08ECD4F6D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B95DA88-A0C4-4D37-BBC5-F08ECD4F6D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B95DA88-A0C4-4D37-BBC5-F08ECD4F6D4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A989B17D-8C69-4EA5-BBBC-921F322B1CE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A989B17D-8C69-4EA5-BBBC-921F322B1CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A989B17D-8C69-4EA5-BBBC-921F322B1CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A989B17D-8C69-4EA5-BBBC-921F322B1CE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

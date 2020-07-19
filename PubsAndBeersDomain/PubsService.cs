@@ -61,6 +61,18 @@ namespace PubsAndBeersDomain
                         new Beer() { Abv = 5.1, Name = "Tropical \"Key Lime\" Blonde Ale", Style = "Blonde Ale" },
                         new Beer() { Abv = 5.3, Name = "Smokestack Red", Style = "American Red Ale" }
                     }
+                },
+                new Pub()
+                {
+                    Id = 5,
+                    Name = "Stormbreaker Brewing",
+                    Rank = 4,
+                    OnTap = new List<Beer>()
+                    {
+                        new Beer() { Abv = 5.6, Name = "Right as Rain Pale Ale", Style = "Pale Ale" },
+                        new Beer() { Abv = 6.4, Name = "Cloud Ripper IPA", Style = "IPA" },
+                        new Beer() { Abv = 5.1, Name = "Mississippi Red", Style = "Red Ale" },
+                    }
                 }
             };
         }

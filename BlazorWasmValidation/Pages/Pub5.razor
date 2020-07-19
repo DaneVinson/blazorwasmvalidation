@@ -1,15 +1,15 @@
-﻿@page "/pubs/1"
-@inject PubViewModel1 ViewModel
+﻿@page "/pubs/5"
+@inject PubViewModel5 ViewModel
 
 <h3 style="display:inline">Edit Pub @(ViewModel.Pub?.Name) </h3>
-@if (Context != null)
+@if (ViewModel.Pub != null)
 {
     <hr />
     <div class="form-group">
         <button @onclick="ViewModel.Save" class="btn btn-primary" disabled="@(ViewModel.IsBusy || !ViewModel.IsValid)">Save</button>
     </div>
     <EditForm EditContext="@Context">
-        <ObjectGraphDataAnnotationsValidator />
+        <FluentValidator></FluentValidator>
         <div class="row">
             <div class="form-group col-2">
                 <label class="control-label">Id</label>
@@ -35,14 +35,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await ViewModel.Initialize(1);
-
+        await ViewModel.Initialize(5);
         Context = new EditContext(ViewModel.Pub);
-        Context.OnFieldChanged += (o, e) =>
-        {
-            ViewModel.IsValid = Context.Validate();
-            StateHasChanged();
-        };
         ViewModel.Validator = Context.Validate;
         ViewModel.StateChanged = StateHasChanged;
     }

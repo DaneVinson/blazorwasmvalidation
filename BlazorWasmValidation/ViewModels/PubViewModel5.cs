@@ -1,4 +1,5 @@
-﻿using PubsAndBeersDomain;
+﻿using FluentValidation;
+using PubsAndBeersDomain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BlazorWasmValidation.ViewModels
 {
-    public class PubViewModel1 : ViewModelBase
+    public class PubViewModel5 : ViewModelBase
     {
-        public PubViewModel1(IPubsService service)
+        public PubViewModel5(IPubsService service)
         {
             Service = service ?? throw new ArgumentNullException(nameof(service));
         }
@@ -16,6 +17,7 @@ namespace BlazorWasmValidation.ViewModels
         public void AddTap()
         {
             Pub.OnTap.Add(new Beer());
+            Console.WriteLine($"Validator is null: {Validator == null}");
             IsValid = Validator?.Invoke() ?? true;
             StateChanged?.Invoke();
         }
