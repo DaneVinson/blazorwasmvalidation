@@ -17,7 +17,6 @@ namespace BlazorWasmValidation.ViewModels
         public void AddTap()
         {
             Pub.OnTap.Add(new Beer());
-            Console.WriteLine($"Validator is null: {Validator == null}");
             IsValid = Validator?.Invoke() ?? true;
             StateChanged?.Invoke();
         }
