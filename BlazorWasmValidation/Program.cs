@@ -27,7 +27,6 @@ namespace BlazorWasmValidation
                     .AddSingleton<AbstractValidator<Beer>, BeerValidator>()
                     .AddSingleton<IValidator<Pub>, PubValidator>()
                     .AddSingleton<AbstractValidator<Pub>, PubValidator>();
-                    //.AddValidatorsFromAssemblyContaining<Beer>();
 
             builder.RootComponents.Add<App>("app");
 
