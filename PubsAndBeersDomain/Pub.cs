@@ -43,15 +43,15 @@ namespace PubsAndBeersDomain
                 .Must(rank => rank > 0 && rank < 6)
                 .WithMessage("Rank must be between 1 and 5");
             RuleForEach(pub => pub.OnTap)
-                .Must(beer => beerValidator.Validate(beer).IsValid);
+                .SetValidator(beerValidator);
         }
     }
 
     public class PubAsyncValidator : PubValidator
     {
         public PubAsyncValidator(
-            AbstractValidator<Beer> beerValidator, 
-            IPubsService pubsService) 
+            AbstractValidator<Beer> beerValidator,
+            IPubsService pubsService)
             : base(beerValidator)
         {
             RuleFor(pub => pub.Name)
